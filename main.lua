@@ -28,7 +28,6 @@ local Vida = 100
 
 function love.load()
   ------ DECLARA AS IMAGENS ------
-  ImgBoss = love.graphics.newImage("imagens/Boss1.png")
   ImgFundo1 = love.graphics.newImage("imagens/Interior1.png")
   ImgFundo2 = love.graphics.newImage("imagens/Interior2.png")
   ImgFundo3 = love.graphics.newImage("imagens/Fundo3.jpg")
@@ -550,6 +549,15 @@ function love.update(dt)
         love.window.setMode(MenuLarg,MenuAltura,{resizable=true, vsync=false})
         Tela = MenuPrincipal
         
+        ImgAeroporto6 = love.graphics.newImage("imagens/Aeroporto61.png")
+        ImgAeroporto7 = love.graphics.newImage("imagens/Aeroporto71.png")
+        ImgAeroporto10 = love.graphics.newImage("imagens/Aeroporto10.png")
+        ImgFundo4 = love.graphics.newImage("imagens/Fundo41.png")
+        ImgFundo2 = love.graphics.newImage("imagens/Interior2.png")
+        ImgFundo5 = love.graphics.newImage("imagens/Lado5.png")
+          
+        SomFundoAtual = SomMenuPrincipal
+        
       end
     end
   end
@@ -702,7 +710,40 @@ function love.update(dt)
       end
     end
   end
-
+  
+  ---------------------------------------------------------------------------- PAREDES 
+  if Tela == Tela3.ImgFundo then
+    if Heroi.POSX >= 0 and Heroi.POSX <= 120 then
+      if Heroi.POSY <= 272  then
+        Heroi.POSY = 272
+      end
+    end
+    if Heroi.POSY >= 110 and Heroi.POSY <= 270 then
+      if Heroi.POSX <= 125 then
+        Heroi.POSX = 125
+      end
+    end
+    if Heroi.POSX >= 122 and Heroi.POSX <= 220 then
+      if Heroi.POSY >= 200 and Heroi.POSY <= 210 then
+        Heroi.POSY = 210
+      end
+    end
+    if Heroi.POSX >= 95 and Heroi.POSX <= 340 then
+      if Heroi.POSY <= 140  then
+        Heroi.POSY = 140
+      end
+    end
+    if Heroi.POSX >= 122 and Heroi.POSX <= 220 then
+      if Heroi.POSY >= 180 and Heroi.POSY <= 200 then
+        Heroi.POSY = 180
+      end
+    end
+    if Heroi.POSY >= 130 and Heroi.POSY <= 270 then
+      if Heroi.POSX >= 337 then
+        Heroi.POSX = 340
+      end
+    end
+  end
   -------------------------------------------------------- INTERAÇÃO E
   if love.keyboard.isDown("e") then
     --------------- VAI DA TELA 3 PRA 1
@@ -732,7 +773,7 @@ function love.update(dt)
     end
     --------------- VAI DA TELA 4 PARA 2
     if Tela == Tela4.ImgFundo then
-      if Nivel == 2 then
+      if Nivel >= 2 then
         if Heroi.POSX > 290 and Heroi.POSX < 350 and Heroi.POSY > 120 and Heroi.POSY < 150 then
           if TravaDaPorta == false then
             Randow = love.math.random(1, 10)
@@ -792,6 +833,7 @@ function love.update(dt)
             PossuiTotem3 = true
             PossuiCodigo1 = false
             Tela2.ImgFundo = love.graphics.newImage("imagens/Interior21.png")
+            Tela = Tela2.ImgFundo
           end
         end
       end
@@ -929,7 +971,7 @@ function love.update(dt)
     end
     ------ VAI DA TELA 4 PARA FECHADURA
     if Tela == Tela4.ImgFundo then
-      if Nivel == 2 then
+      if Nivel >= 2 then
         if Heroi.POSX > 290 and Heroi.POSX < 350 and Heroi.POSY > 120 and Heroi.POSY < 150 then
           Randow = love.math.random(1, 10)
           TravaDaPorta = true
@@ -1082,8 +1124,8 @@ function love.draw()
     love.graphics.draw(ImgBoss, Boss.POSX, Boss.POSY, 0, 1, 1, ImgBoss:getWidth()/2, ImgBoss:getHeight()/2)
   end
   ------- MOSTRA A POSIÇÃO DO MOUSE
-  love.graphics.print("Mouse em [" .. x .. " , " .. y .. "]", x, y)
-  love.graphics.print(" [" .. Heroi.POSX .. " , " .. Heroi.POSY .. "]", Heroi.POSX, Heroi.POSY)
+  --love.graphics.print("Mouse em [" .. x .. " , " .. y .. "]", x, y)
+  --love.graphics.print(" [" .. Heroi.POSX .. " , " .. Heroi.POSY .. "]", Heroi.POSX, Heroi.POSY)
 
   ------- AEROPORTO 12
   if Tela == ImgAeroporto12 then
@@ -1312,8 +1354,8 @@ function love.draw()
       love.graphics.rectangle('line', 115,285, 35, 15)
       if love.keyboard.isDown("e") then
         if PossuiCodigo1 == false then
-          love.graphics.print("Esta Trancada precisa",70 , 90)
-          love.graphics.print("de uma Senha",70 , 100)
+          love.graphics.print("Esta Trancada precisa",70 , 100)
+          love.graphics.print("de uma Senha",70 , 110)
         end
       end
     end
@@ -1342,7 +1384,6 @@ function love.draw()
     end
     if Tela5.ImgFundo == ImgFundo51 then
       if Heroi.POSX > 450 then
-        InterfaceTexto = true
         love.graphics.print("PARECE UM BLOQUEIO HMMMMMMMMMMM",250, love.graphics.getHeight()-300)
       end 
     end
